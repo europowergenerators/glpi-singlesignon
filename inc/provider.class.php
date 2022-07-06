@@ -265,8 +265,7 @@ class PluginSinglesignonProvider extends CommonDBTM {
          echo "<th colspan='4'>" . __('Test') . "</th>";
          echo "</tr>\n";
 
-         $url = PluginSinglesignonToolbox::getCallbackUrl($ID);
-         $fullUrl = $CFG_GLPI['url_base'] . $url;
+         $fullUrl = PluginSinglesignonToolbox::getCallbackUrl($ID, [], true);
          echo "<tr class='tab_bg_1'>";
          echo "<td>" . __sso('Callback URL') . "</td>";
          echo "<td colspan='3'><a id='singlesignon_callbackurl' href='$fullUrl' data-url='$url'>$fullUrl</a></td>";

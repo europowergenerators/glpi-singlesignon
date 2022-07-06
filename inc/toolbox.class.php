@@ -34,10 +34,11 @@ class PluginSinglesignonToolbox {
     * @param array $query
     * @return string
     */
-   public static function getCallbackUrl($id, $query = []) {
+   public static function getCallbackUrl($id, $query = [], $use_url_base = false) {
       global $CFG_GLPI;
 
-      $url = $CFG_GLPI['root_doc'] . '/plugins/singlesignon/front/callback.php';
+      $root = $use_url_base ? $CFG_GLPI['url_base'] : $CFG_GLPI["root_doc"];
+      $url = $root . '/marketplace/singlesignon/front/callback.php';
 
       $url .= "/provider/".$id;
 
@@ -99,7 +100,7 @@ class PluginSinglesignonToolbox {
       return (substr($haystack, 0, $length) === $needle);
    }
 
-   static function getPictureUrl($path) {
+   static function getPictureUrl($path, $use_url_base = false) {
       global $CFG_GLPI;
 
       $path = Html::cleanInputText($path); // prevent xss
@@ -108,7 +109,8 @@ class PluginSinglesignonToolbox {
          return null;
       }
 
-      return $CFG_GLPI['root_doc'] . '/plugins/singlesignon/front/picture.send.php?path=' . $path;
+      $root = $use_url_base ? $CFG_GLPI['url_base'] : $CFG_GLPI["root_doc"];
+      return $root . '/marketplace/singlesignon/front/picture.send.php?path=' . $path;
    }
 
    static public function savePicture($src, $uniq_prefix = null) {
